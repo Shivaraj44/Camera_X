@@ -10,13 +10,27 @@
         android:id="@+id/floating_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="58dp"
         app:backgroundTint="#50B64D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        app:srcCompat="@drawable/cam"/>
+        app:srcCompat="@drawable/cam" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Empty Gallery"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:id="@+id/empty_gallery"
+        android:visibility="gone"
+        android:layout_marginTop="100sp"
+        />
 
 
     <LinearLayout
@@ -24,26 +38,26 @@ android:layout_alignParentEnd="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-android:layout_centerVertical="true"
+        android:layout_centerVertical="true"
         android:visibility="gone"
         >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter Folder Name"
+            android:text="Create Folder"
             android:textAlignment="center"
             android:textSize="25dp" />
         <EditText
             android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:hint="Folder name"
+            android:gravity="center"
+            android:hint="Folder Name"
             android:textColorHint="#3D5AFE"
             android:id="@+id/et_name"
             android:layout_height="wrap_content"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save"
+            android:text="Take photo"
             android:layout_gravity="center"
             android:id="@+id/save"
             />

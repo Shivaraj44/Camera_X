@@ -32,8 +32,9 @@ class HomeActivity : AppCompatActivity() {
                 val intent = Intent(this@HomeActivity, MainActivity::class.java)
                 intent.putExtra("directoryName", et_name.text.toString())
                 startActivity(intent)
+                liner_home.visibility = View.GONE
+
             })
-            liner_home.visibility = View.GONE
 
         })
 

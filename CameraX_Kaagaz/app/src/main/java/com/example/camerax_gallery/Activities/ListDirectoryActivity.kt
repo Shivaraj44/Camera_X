@@ -37,6 +37,7 @@ viewModel.fetchAllAlbums().observe(this, Observer {
             adapter = listPhotosAdapter
         }
     }
+    // Open one more activity and pass album.albumName
 
     override fun onItemClicked(name: String) {
        // Open one more activity and pass album.albumName

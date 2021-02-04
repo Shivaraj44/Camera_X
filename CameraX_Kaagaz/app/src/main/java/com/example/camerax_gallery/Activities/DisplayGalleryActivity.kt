@@ -56,33 +56,13 @@ class DisplayGalleryActivity : AppCompatActivity(), DisplayListner {
             val gridLayoutManager = GridLayoutManager(this@DisplayGalleryActivity, 3)
             val adapter = DisplayAdapter(listofiles, this@DisplayGalleryActivity)
             shwo_recyclerview.adapter = adapter
-            shwo_recyclerview.layoutManager = gridLayoutManager
+           shwo_recyclerview.layoutManager = gridLayoutManager
         }
     }
 
     override fun display(position: Int, p: String) {
+   val intent1 = Intent(this, DisplayImageActivity::class.java)
 
-
-
-        // val byteArray: ByteArray = bStream.toByteArray()
-//
-
-
-//        val file: File =
-//            File(Environment.getExternalStorageDirectory().toString() + "imageBitmap" + ".png")
-//        val fOut = FileOutputStream(file)
-//
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 85, fOut)
-//        fOut.flush()
-//        fOut.close()
-
-
-        val intent1 = Intent(this, DisplayImageActivity::class.java)
-        // intent1.putExtra("filename", "imageBitmap");
-
-
-       // intent1.putExtra("PICTURE", byteArray);
-       // startActivity(intent1);
         intent1.putExtra("passing", p)
         Log.d("bitmap", "" + p)
         Toast.makeText(this, "posotion " + position +p, Toast.LENGTH_SHORT).show()

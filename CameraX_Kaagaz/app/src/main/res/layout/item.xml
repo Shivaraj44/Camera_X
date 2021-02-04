@@ -9,5 +9,4 @@
         android:id="@+id/recycler_image"
         android:layout_margin="10dp"
         />
-
 </RelativeLayout>

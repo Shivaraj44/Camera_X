@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CameraX_Gallery">
-        <activity android:name=".Activities.DisplayImageActivity"></activity>
+        <activity android:name=".Activities.DisplayImageActivity">
+
+        </activity>
         <activity android:name=".Activities.DisplayGalleryActivity" />
         <activity android:name=".Activities.ListDirectoryActivity">
             <intent-filter>

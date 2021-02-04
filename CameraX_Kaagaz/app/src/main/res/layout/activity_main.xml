@@ -6,27 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
-    <Button
-        android:id="@+id/camera_capture_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <ImageView
+        android:id="@+id/one_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="50dp"
-android:layout_centerHorizontal="true"
-        android:scaleType="fitCenter"
-        android:background="@drawable/ciecle"
+        android:src="@drawable/crop"
 
-        android:text="Take Photo"
-       android:layout_alignParentBottom="true"
-       />
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="One Image"
+        />
+    <ImageView
+        android:id="@+id/camera_capture_button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/click"
 
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="50dp"
-    android:id="@+id/one_image"
-    />
+        />
     <androidx.camera.view.PreviewView
         android:id="@+id/Livecamera"
         android:layout_width="match_parent"

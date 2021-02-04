@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    // Onclicking of button your are taking photo
     private fun getOutputDirectory(): File {
        val directoryName= intent.getStringExtra("directoryName")
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
@@ -149,7 +150,8 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-
+    //binding the lifecycle of camerax and activity. Overlapping the camera hardware into the xml where
+// the camera will be vbisible in the background
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
