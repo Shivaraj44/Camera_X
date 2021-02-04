@@ -13,7 +13,6 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.camerax_gallery.DataBase.DataBase
 import com.example.camerax_gallery.R
 import com.example.camerax_gallery.viewmodel.UserViewModel
 import com.example.camerax_gallery.viewmodel.UserViewModelFactory
@@ -25,6 +24,10 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
+/**
+CameraX is used in this Activity where we will first bind the lifecycle of the camera to
+lifecycle of the activity and then we will overlap the camera to the xml
+ */
 class MainActivity : AppCompatActivity() {
     var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
@@ -38,23 +41,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         viewModel = UserViewModelFactory(this).create(UserViewModel::class.java)
 
-        one_image.setOnClickListener(View.OnClickListener {
+
+        //Opens another activity where we will display all the albums in the gallery
+        open_gallery.setOnClickListener(View.OnClickListener {
             val intent = Intent(this@MainActivity, ListDirectoryActivity::class.java)
 
             startActivity(intent)
 
         })
-        // Request camera permissions
+
+        // Requesting camera permissions
         if (allPermissionsGranted()) {
+            //if granted then start camera
             startCamera()
         } else {
+            //request the permission
             ActivityCompat.requestPermissions(
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
 
         // Onclicking of button your are taking photo
-        camera_capture_button.setOnClickListener { takePhoto() }
+        camera_capture_button.setOnClickListener {
+            takePhoto()
+        }
 
         outputDirectory = getOutputDirectory()
 
@@ -69,9 +79,12 @@ class MainActivity : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    // Onclicking of button your are taking photo
+    /*
+     Onclicking of button your are taking photo and storing in the local storage by creating a directry
+    which was getting fro the HomeActivity
+    */
     private fun getOutputDirectory(): File {
-       val directoryName= intent.getStringExtra("directoryName")
+        val directoryName = intent.getStringExtra("directoryName")
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
             File(it, directoryName).apply { mkdirs() }
         }
@@ -79,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             mediaDir else filesDir
     }
 
+    //complete destroy
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
@@ -109,7 +123,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    public fun takePhoto() {
+    /*
+    Taking the photo and storing into the directory which we have created using the getOutputDirectory.
+    we are storing the directory name and currentTimeStamp with .jpg to it.
+     */
+    fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
 
@@ -136,9 +154,6 @@ class MainActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(storing_image)
 
-                    val database = DataBase
-
-                    val a = 0;
 
 //                    viewModel.insertDataToDatabase(a, savedUri.toString())
 
@@ -150,8 +165,8 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    //binding the lifecycle of camerax and activity. Overlapping the camera hardware into the xml where
-// the camera will be vbisible in the background
+    //binding the lifecycle of cameraX and activity. Overlapping the camera hardware into the xml where
+    // the camera will be visible in the background
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
@@ -159,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            // Preview
+            // Preview to the surface of xml file.Its a Listner which updates the ui everytime the output changes.
             val preview = Preview.Builder()
                 .build()
                 .also {
@@ -178,7 +193,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             // Select back camera as a default
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
                 // Unbind use cases before rebinding

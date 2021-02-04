@@ -16,7 +16,10 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.io.File
 
-
+/**
+Display the Images inside the folder which we have selected with the help of recyclerview
+using gridLinearlayout
+ */
 class DisplayGalleryActivity : AppCompatActivity(), DisplayListner {
 
     // var listfiles = Array<String>() // list of file paths
@@ -29,11 +32,12 @@ class DisplayGalleryActivity : AppCompatActivity(), DisplayListner {
         val name = intent.getStringExtra("data")
 
         if (name != null) {
+            //method to get all the images inside the storage
             getFromSdcard(name)
         }
     }
 
-
+// using externalMediaDirs we are able to get all the photos from the folder
     fun getFromSdcard(root: String) {
         CoroutineScope(IO).launch {
             val file = externalMediaDirs.firstOrNull()?.let { File(it, root) }
@@ -44,6 +48,7 @@ class DisplayGalleryActivity : AppCompatActivity(), DisplayListner {
                 }
 
             }
+            //after completion we are setting the adapter and displaying it
         }.invokeOnCompletion {
             setAdapter()
         }
@@ -59,10 +64,10 @@ class DisplayGalleryActivity : AppCompatActivity(), DisplayListner {
            shwo_recyclerview.layoutManager = gridLayoutManager
         }
     }
-
+// on clicking each image we ar previewing it in another activity
     override fun display(position: Int, p: String) {
    val intent1 = Intent(this, DisplayImageActivity::class.java)
-
+//passing the path of the file
         intent1.putExtra("passing", p)
         Log.d("bitmap", "" + p)
         Toast.makeText(this, "posotion " + position +p, Toast.LENGTH_SHORT).show()

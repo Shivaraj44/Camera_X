@@ -34,7 +34,7 @@
 
 
     <LinearLayout
-        android:id="@+id/liner_home"
+        android:id="@+id/linear_layout_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -52,7 +52,7 @@
             android:gravity="center"
             android:hint="Folder Name"
             android:textColorHint="#3D5AFE"
-            android:id="@+id/et_name"
+            android:id="@+id/et_albumName"
             android:layout_height="wrap_content"/>
         <Button
             android:layout_width="wrap_content"

@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.camerax_gallery.OnetoMany.Folder
 import com.example.camerax_gallery.R
 import com.example.camerax_gallery.viewmodel.UserViewModel
 import com.example.camerax_gallery.viewmodel.UserViewModelFactory
 import kotlinx.android.synthetic.main.activity_home.*
 
+/** In this we are creating album name entered by the user after clicking the floating button on the bottom
+//after clicking the take photo button navigating to another activity where camera is opening
+*/
 class HomeActivity : AppCompatActivity() {
     private lateinit var viewModel: UserViewModel
 
@@ -20,19 +22,20 @@ class HomeActivity : AppCompatActivity() {
         viewModel = UserViewModelFactory(this).create(UserViewModel::class.java)
 
 
-
+// On clicking this button a layout is visible where user will enter the album name
         floating_action_button.setOnClickListener(View.OnClickListener {
 
-            liner_home.visibility = View.VISIBLE
-            val name = et_name.text.toString()
-            var b = 0;
+            linear_layout_home.visibility = View.VISIBLE
             save.setOnClickListener(View.OnClickListener {
-                val folder = Folder(b, name)
-                viewModel.insertgalleryname(b, et_name.text.toString())
+                viewModel.insertalbumname(0, et_albumName.text.toString())
+
+                //Opening MainActivity
                 val intent = Intent(this@HomeActivity, MainActivity::class.java)
-                intent.putExtra("directoryName", et_name.text.toString())
+
+                // passing the album name to MainActivity
+                intent.putExtra("directoryName", et_albumName.text.toString())
                 startActivity(intent)
-                liner_home.visibility = View.GONE
+                linear_layout_home.visibility = View.GONE
 
             })
 
